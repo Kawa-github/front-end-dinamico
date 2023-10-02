@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input{
+        margin: 10px;
+    }
+</style>
+<body>
+    <form action="https://www.w3schools.com/action_page.php?" method="get">
+
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome">
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+        <br>
+
+        <label for="data">Data:</label>
+        <input type="date" name="data" id="data">
+        <br>
+
+
+        <input type="radio" id="html" name="fav_language" value="HTML">
+        <label for="html">HTML</label><br>
+        <input type="radio" id="css" name="fav_language" value="CSS">
+        <label for="css">CSS</label><br>
+        <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+        <label for="javascript">JavaScript</label>
+
+        <br>
+        <label for="myfile">Anexo:</label>
+        <input type="file" id="myfile" name="myfile">
+
+        <br>
+        <button class="btn-send">Enviar</button>
+
+    </form>    
+</body>
+
+<script>
+    let btn = document.querySelector(".btn-send")
+
+    function ValidarEmail (email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email); 
+    }
+
+    btn.addEventListener("click", function(e){
+        if(document.querySelector("#nome").value == ""){
+            alert("Campo nome está vazio")
+            e.preventDefault()
+        }
+
+
+        if(!ValidarEmail(document.querySelector("#email").value)){
+            alert("Insira um email válido.")
+            e.preventDefault()
+        }
+
+        if(document.querySelector("#data").value == ""){
+            alert("Data não preenchida")
+            e.preventDefault()
+        }
+        
+        let radioButtons = document.querySelectorAll('input[type="radio"][name="fav_language"]');
+
+        let selecionado = false; 
+
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                selecionado = true;
+                return; 
+            }
+        });
+
+        if (!selecionado) {
+            alert("É necessário selecionar um campo");
+            e.preventDefault(); 
+        }
+
+        if (document.querySelector("#myfile").files.length === 0) {
+            alert("É obrigatório anexar um arquivo" )
+            e.preventDefault()
+        }
+    })
+</script>
+
+</html>
