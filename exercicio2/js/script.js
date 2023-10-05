@@ -7,6 +7,15 @@ const editInput = document.querySelector("#edit-input")
 const cancelEditBtn = document.querySelector("#cancel-edit-btn")
 
 let oldInputValue
+let id = 0
+
+const saveSessionStorage = (id, task) =>{
+    sessionStorage.setItem(id,task)
+}
+
+const removeItemSessionStorage = (id) =>{
+    sessionStorage.removeItem(id)
+}
 
 const saveTodo = (text) => {
 
@@ -32,7 +41,13 @@ const saveTodo = (text) => {
     deleteBtn.innerHTML = "<i class='fa-solid fa-xmark'></i>"
     todo.appendChild(deleteBtn)
 
+    const todoId = ++id
+
+    saveSessionStorage(todoId, todoInput.value)
     todoList.appendChild(todo)
+
+
+    // console.log("tarefa", todoInput.value)
 
     todoInput.value = ""
     todoInput.focus()
@@ -54,6 +69,7 @@ const updateTodo = (text) =>{
             todoTitle.innerText = text
         }
     })
+    
 }
 
 todoForm.addEventListener("submit", (e) =>{
@@ -87,8 +103,11 @@ document.addEventListener("click", (e) =>{
         oldInputValue  = todoTitle
     }
 
+    
     if(targetEl.classList.contains("remove-todo")){
+        removeItemSessionStorage(id)
         parentEl.remove()
+
     }
 })
 
