@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar dados com API</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+
+</style>
+<body>
+    <div id="pokemons"></div>
+</body>
+<script>
+    let divPokemon = document.querySelector("#pokemons")
+    const url = "https://pokeapi.co/api/v2/pokemon/"
+
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data){
+            let pokemons = data.results
+            console.log(pokemons)
+            return pokemons.map(function(p){
+                let nome = document.createElement("h1")
+                nome.innerHTML = `${p.name}`
+                divPokemon.append(nome)
+            })
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+</script>
+</html>
