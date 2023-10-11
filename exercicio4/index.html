@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <div id="div-joke">
+            
+            <input type="text" name="" id="ask"> 
+            <input type="text" name="" id="answer"> 
+            <button class="btn-obter">Obter Piada</button>
+        </div>
+    </form>
+</body>
+<script>
+
+    let url = "https://jokeapi.dev/joke/Any?lang=pt"
+    let div_joke = document.querySelector("#div_joke")
+    let pergunta = document.querySelector("#ask")
+    let resposta = document.querySelector("#answer")
+
+
+      async function getJoke() {
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          console.log(data)
+          return data;
+        } catch (error) {
+          throw new Error("Não foi possível obter uma piada.");
+        }
+      }
+      getJoke()
+
+      document.querySelector(".btn-obter").addEventListener("click",getJoke)
+</script>
+</html>
